@@ -102,7 +102,12 @@ def caption_png(text, hook, out):
         x = (W - f.getlength(s)) / 2
         ds.text((x + 2, y0 + k * lh + 3), s, font=f, fill=(0, 0, 0, 200))
     sh_ = sh_.filter(ImageFilter.GaussianBlur(6))
-    Image.alpha_composite(sh_, txt).save(out)
+    # soft dark scrim behind the text block so captions read on bright footage
+    scrim = Image.new("RGBA", (W, H), (0, 0, 0, 0)); dsc = ImageDraw.Draw(scrim)
+    pad = 70
+    dsc.rectangle([0, y0 - pad, W, y0 + lh * len(lines) + pad * 0.6], fill=(0, 0, 0, 105))
+    scrim = scrim.filter(ImageFilter.GaussianBlur(45))
+    Image.alpha_composite(Image.alpha_composite(scrim, sh_), txt).save(out)
 
 def main():
     spath = sys.argv[1]; offline = "--offline" in sys.argv
@@ -121,6 +126,8 @@ def main():
         dur = len(a) / sr; voice.append(a)
         raw = os.path.join(tmp, f"raw{i:02d}.mp4")
         if offline: placeholder_clip(i, raw, dur)
+        elif os.path.exists(raw) and os.path.exists(os.path.join(wd, "clips.json")) and i < len(json.load(open(os.path.join(wd, "clips.json")))["clips"]):
+            c = json.load(open(os.path.join(wd, "clips.json")))["clips"][i]; credits.append(c); used.add(c["id"])
         else: credits.append(pexels_clip(b["query"], dur, used, raw))
         png = os.path.join(tmp, f"cap{i:02d}.png"); caption_png(b["text"], b["hook"], png)
         seg = os.path.join(tmp, f"seg{i:02d}.mp4")
