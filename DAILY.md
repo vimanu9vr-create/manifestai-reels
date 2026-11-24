@@ -8,6 +8,8 @@ Three posts a day, each made by its own scheduled run. Every run is told its SLO
 | `carousel` | ~1:00 PM | 6–10 slide carousel | Instagram only | `daily/YYYY-MM-DD/carousel/` |
 | `reel-2` | ~7:30 PM | story-voice reel, DIFFERENT angle | Instagram Reels + YouTube Shorts | `daily/YYYY-MM-DD/reel-2/` |
 
+**Audience: India first.** Indian English, ₹ amounts, Indian examples (salary in lakh, job offers in Bengaluru/Mumbai, exams, family expectations), while staying understandable worldwide. Captions may mix in light Hinglish when natural.
+
 Instagram account: @try_manifestation, page id 17841438571126703 ("ManifestAI | Manifestation App" — never the personal account).
 If `log.json` already has an entry with today's date AND this slot, stop: it is already posted.
 Variety rule: read today's and yesterday's log entries first. Never reuse a hook family, topic or CTA from the last 3 posts.

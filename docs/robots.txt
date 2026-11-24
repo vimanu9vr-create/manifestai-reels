@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vimanu9vr-create.github.io/manifestai-reels/sitemap.xml
