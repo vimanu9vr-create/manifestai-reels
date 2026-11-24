@@ -1,1 +1,63 @@
-[]
+[
+ {
+  "date": "2026-11-25",
+  "posted_at_utc": "2026-11-24T14:49Z",
+  "hook": "\"I am abundant\" for 3 weeks. Your brain said no.",
+  "format": "story-voice (Pexels + Kokoro af_heart)",
+  "duration_s": 39.33,
+  "cta": "comment generic affirmation -> I'll rewrite it",
+  "instagram_media_id": "18134476402706165",
+  "youtube_id": "39nRZlHGojY",
+  "youtube_url": "https://www.youtube.com/shorts/39nRZlHGojY",
+  "clips": [
+   {
+    "id": 5681759,
+    "url": "https://www.pexels.com/video/person-decorating-a-cake-5681759/",
+    "by": "cottonbro studio",
+    "query": "woman sitting alone by window morning light"
+   },
+   {
+    "id": 8802295,
+    "url": "https://www.pexels.com/video/woman-applying-facial-cream-8802295/",
+    "by": "Mike Jones",
+    "query": "woman looking in bathroom mirror"
+   },
+   {
+    "id": 36207178,
+    "url": "https://www.pexels.com/video/rainy-cityscape-view-from-a-high-rise-building-36207178/",
+    "by": "\u015eeyhmus Kino",
+    "query": "woman looking out rainy window"
+   },
+   {
+    "id": 6381008,
+    "url": "https://www.pexels.com/video/a-person-holding-a-cup-of-coffee-6381008/",
+    "by": "Liza Summer",
+    "query": "hands holding coffee cup on table"
+   },
+   {
+    "id": 7698438,
+    "url": "https://www.pexels.com/video/person-writing-on-a-notebook-7698438/",
+    "by": "MART  PRODUCTION",
+    "query": "hand writing in notebook close up"
+   },
+   {
+    "id": 4872898,
+    "url": "https://www.pexels.com/video/person-typing-on-a-laptop-4872898/",
+    "by": "Tima Miroshnichenko",
+    "query": "typing on laptop at desk"
+   },
+   {
+    "id": 7017762,
+    "url": "https://www.pexels.com/video/grandma-using-her-cellphone-7017762/",
+    "by": "RDNE Stock project",
+    "query": "woman using phone in cafe"
+   },
+   {
+    "id": 39872700,
+    "url": "https://www.pexels.com/video/dramatic-sunrise-over-urban-skyline-39872700/",
+    "by": "Manish Ratna Buddhacharya",
+    "query": "sunrise over city skyline"
+   }
+  ]
+ }
+]
