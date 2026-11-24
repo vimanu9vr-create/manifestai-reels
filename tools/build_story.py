@@ -124,6 +124,7 @@ def main():
         a, sr = k.create(tts_text(b["text"]), voice=VOICE, speed=SPEED, lang="en-us")
         a = np.concatenate([np.zeros(int(0.12 * sr)), a, np.zeros(int(PAD * sr))])
         dur = len(a) / sr; voice.append(a)
+        if i == 0: hook_seconds = round((len(a) / sr) - PAD, 2)   # time until the hook is fully spoken
         raw = os.path.join(tmp, f"raw{i:02d}.mp4")
         if offline: placeholder_clip(i, raw, dur)
         elif os.path.exists(raw) and os.path.exists(os.path.join(wd, "clips.json")) and i < len(json.load(open(os.path.join(wd, "clips.json")))["clips"]):
@@ -155,7 +156,7 @@ def main():
     dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", out]))
     sh("ffmpeg", "-loglevel", "error", "-y", "-i", out, "-vf", f"fps=12/{dur:.2f},scale=270:480,tile=6x2",
        "-frames:v", "1", os.path.join(tmp, "contact.jpg"))
-    json.dump({"clips": credits, "duration": round(dur, 2)}, open(os.path.join(wd, "clips.json"), "w"), indent=1)
+    json.dump({"clips": credits, "duration": round(dur, 2), "hook_seconds": hook_seconds}, open(os.path.join(wd, "clips.json"), "w"), indent=1)
     print(json.dumps({"video": out, "duration": round(dur, 2), "clips": credits}, indent=1))
 
 if __name__ == "__main__":

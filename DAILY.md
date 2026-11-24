@@ -35,9 +35,20 @@ Several varied queries: Reels/Shorts ranking signals now; manifestation / affirm
 what manifestation audiences complain about (Reddit, comments); saturated angles; one adjacent viral format worth adapting.
 Honesty: you cannot see other accounts' view counts. Never state a view count, trend name or statistic you didn't verify.
 
-## 3. Write
-- 6–10 hooks, score them (claim-first, stakes in the hook, a concrete number/date/thing), pick the winner.
-  Never open with "stop scrolling". Hook on screen ≤ ~9 words.
+## 3. Write — the first 3 seconds decide everything
+- Write at least 8 hooks from DIFFERENT formulas into `daily/YYYY-MM-DD/<slot>/hooks.txt` and run
+  `python3 tools/hook_check.py hooks daily/YYYY-MM-DD/<slot>/hooks.txt`. Use the top hook only if it scores ≥ 75.
+  If none does, write a second round from different formulas (don't polish a weak one). Expect two rounds.
+- Strong-hook formulas that work for this niche: name the exact thing they've been doing ("\"I am abundant\" for 3 weeks…");
+  the day/moment they fail ("Day 4 is when you quit."); a cost in rupees/time ("Your dream home costs 40 lakh…");
+  contradiction of common advice ("Stop writing new affirmations."); the hidden reason ("Your brain is quietly rejecting…").
+- The hook must carry its own STAKES (what they lose / keep failing at) and a SPECIFIC detail (number, day, quoted line).
+  Never open with "stop scrolling", "POV", "hey", "did you know". Never promise results.
+- First 3 seconds: the hook is on screen from frame 0, readable with sound off (≤ 12 words; the builder centres it in the
+  upper third), fully SPOKEN within ~3 s (the checker measures this from the real audio), over footage that is already
+  moving and visually matches the claim (a person mid-action, not a slow landscape).
+- Retention: beat 1 escalates the hook (no setup), a turn/open loop by beat 3–4 ("But…", "The problem…", "It wasn't…"),
+  one idea per shot (≤ 24 words), payoff near the end, last beat = comment/save/send trigger. 20–50 s total.
 - Script = hook + 5–8 beats, each one or two short sentences (≤ ~20 words). Every line is narrated AND shown.
 - The emotion must BE the app's argument: build the problem (generic affirmations aren't yours → you quit by day 2–4),
   and the app is the answer (ManifestAI writes your affirmations from the one sentence you type about your own goal).
@@ -58,7 +69,10 @@ python3 tools/build_story.py daily/YYYY-MM-DD/<slot>/script.json
 Open `daily/YYYY-MM-DD/<slot>/_build/contact.jpg` and LOOK at it: captions readable on every shot, footage matches the line,
 nothing off-topic (wrong gender/age is fine, wrong mood or weird content is not), hook frame works with sound off.
 If a clip is wrong, change that beat's `query`, delete `_build/raw0N.mp4` and its entry in `clips.json`, rebuild.
-ffprobe: 1080x1920, 30 fps, h264 + aac, 20–60 s. If QC fails twice, do NOT post — report instead.
+ffprobe: 1080x1920, 30 fps, h264 + aac, 20–50 s.
+Run `python3 tools/hook_check.py script daily/YYYY-MM-DD/<slot>/script.json` AFTER building (it reads the measured hook audio length) — must print SCRIPT OK.
+Carousel: `python3 tools/hook_check.py carousel .../carousel.json` must print CAROUSEL OK (cover slide is the hook).
+If QC fails twice, do NOT post — report instead.
 
 ## 5. Publish
 1. Commit + push the day folder. Video URL = `https://raw.githubusercontent.com/vimanu9vr-create/manifestai-reels/<commit sha>/daily/YYYY-MM-DD/<slot>/<name>.mp4` — curl -I it, expect 200.
