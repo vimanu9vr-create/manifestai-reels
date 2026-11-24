@@ -27,7 +27,7 @@ git config user.name "ManifestAI reels bot"; git config user.email "reels-bot@us
 - Read `log.json` (every past post, its hook, format, CTA, clips).
 - Pull the last 7 Instagram posts (Zapier "Instagram for Business → New Media", account above): likes + comments per post.
 - Pull YouTube stats for the logged `youtube_id`s (Zapier YouTube find_video / get_report) where available.
-- Note which hook family / CTA / topic did best. **Early on ignore raw views; compare against the account's own median.**
+- Note which hook family / CTA / topic / keyword cluster did best. **Early on ignore raw views; compare against the account's own median.**
 - Never repeat yesterday's CTA. Never reuse a Pexels clip id already in `log.json` (the builder enforces this).
 
 ## 2. Research (mandatory, web search, last 7 → 30 days first)
@@ -47,7 +47,9 @@ Honesty: you cannot see other accounts' view counts. Never state a view count, t
   India prices if mentioned: ₹99/week, ₹249/month, ₹999/year. Never claim affirmations cause money/jobs/houses.
   No fake testimonials, user counts, results or guarantees. No URL on screen ("link in bio").
 - Write `daily/YYYY-MM-DD/<slot>/script.json` and `daily/YYYY-MM-DD/<slot>/post.json`
-  (`instagram_caption` ≤2200 chars with 8–12 hashtags, `youtube_title` ≤100 chars incl. #shorts, `youtube_description`, `youtube_tags`).
+  following **SEO.md** (`keyword`, `secondary_keywords`, `instagram_caption` with 3–5 hashtags, `youtube_title`, `youtube_description`, `youtube_tags`).
+- Read SEO.md BEFORE writing the script: the primary keyword has to be spoken in the hook or first 2 beats and shown on screen.
+- Run `python3 tools/seo_check.py daily/YYYY-MM-DD/<slot>/post.json daily/YYYY-MM-DD/<slot>/script.json` — must print SEO OK before posting.
 
 ## 4. Build + QC
 ```
@@ -63,14 +65,15 @@ ffprobe: 1080x1920, 30 fps, h264 + aac, 20–60 s. If QC fails twice, do NOT pos
 2. Instagram: Zapier `instagram_for_business_publish_video` with instagramPageId 17841438571126703, video URL, caption.
    If it returns "Video is still processing", wait 3 min, then check "New Media" — only retry if today's post is NOT there (no duplicates).
 3. YouTube: Zapier `youtube_upload_video`, privacy_status public, made_for_kids false, notify_subscribers true, tags, default_language en.
-4. Append to `log.json` (date, slot, type, folder, hook, format, cta, duration, instagram_media_id, youtube_id, clips) and push.
+4. Append to `log.json` (date, slot, keyword, type, folder, hook, format, cta, duration, instagram_media_id, youtube_id, clips) and push.
 
 ## 5b. Carousel slot (instead of steps 4–5)
 Write `daily/YYYY-MM-DD/carousel/carousel.json` (see header of `tools/build_carousel.py`): slide 1 = hook (≤8 words),
 middle slides = one idea each (title ≤6 words + body ≤25 words), last slide = app CTA. No emoji in slide text (the font can't draw them; captions can have emoji).
 `python3 tools/build_carousel.py daily/YYYY-MM-DD/carousel/carousel.json` → look at `_build/contact.jpg` (readable? photo fits the line?).
 Commit, push, then Zapier `instagram_for_business_publish_photo_s` with `media` = list of raw.githubusercontent URLs (pinned to the commit SHA, in slide order) and the caption.
-Log it with `"slot": "carousel"`, `"type": "carousel"`, and `"photos"` from clips.json (the builder avoids reusing photo ids).
+Carousel post.json needs `keyword`, `secondary_keywords`, `instagram_caption` (3–5 hashtags); run `python3 tools/seo_check.py .../carousel/post.json .../carousel/carousel.json` until SEO OK.
+Log it with `"slot": "carousel"`, `"keyword"`, `"type": "carousel"`, and `"photos"` from clips.json (the builder avoids reusing photo ids).
 
 ## 6. Report
 Send the user a short summary: hook, what yesterday's numbers suggested, links to both posts, anything that failed.
