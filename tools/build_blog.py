@@ -101,6 +101,7 @@ def page(title, desc, canon, body, img=None, jsonld=None):
     og = f'<meta property="og:image" content="{img}">' if img else ""
     ld = f'<script type="application/ld+json">{json.dumps(jsonld)}</script>' if jsonld else ""
     return f"""<!DOCTYPE html><html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="p:domain_verify" content="a835aaa98f7c3bfddc9791f908876ead"/>
 <title>{html.escape(title)}</title><meta name="description" content="{html.escape(desc)}"><link rel="canonical" href="{canon}">
 <meta property="og:title" content="{html.escape(title)}"><meta property="og:description" content="{html.escape(desc)}"><meta property="og:url" content="{canon}">{og}
 <meta name="twitter:card" content="summary_large_image"><link rel="alternate" type="application/rss+xml" href="{SITE}/rss.xml">{ld}<style>{CSS}</style></head>
