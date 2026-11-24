@@ -1,0 +1,58 @@
+# Daily ManifestAI reel — runbook
+
+One reel per day, posted to Instagram (@try_manifestation, page id 17841438571126703) and YouTube Shorts, around 8:30 AM IST.
+Style: matches the user's "story-voice" reels — one Pexels clip per line, bold uppercase white hook, one white caption
+sentence per shot, Kokoro `af_heart` narration reading every line, ~35–50 s.
+
+## 0. Setup (fresh machine)
+```
+pip install --break-system-packages -q kokoro-onnx soundfile
+git config user.name "ManifestAI reels bot"; git config user.email "reels-bot@users.noreply.github.com"
+```
+`tools/build_story.py` downloads the Kokoro model from GitHub releases on first run. It needs `PEXELS_API_KEY` in the env.
+
+## 1. Learn from what already ran
+- Read `log.json` (every past post, its hook, format, CTA, clips).
+- Pull the last 7 Instagram posts (Zapier "Instagram for Business → New Media", account above): likes + comments per post.
+- Pull YouTube stats for the logged `youtube_id`s (Zapier YouTube find_video / get_report) where available.
+- Note which hook family / CTA / topic did best. **Early on ignore raw views; compare against the account's own median.**
+- Never repeat yesterday's CTA. Never reuse a Pexels clip id already in `log.json` (the builder enforces this).
+
+## 2. Research (mandatory, web search, last 7 → 30 days first)
+Several varied queries: Reels/Shorts ranking signals now; manifestation / affirmation / future-self formats trending;
+what manifestation audiences complain about (Reddit, comments); saturated angles; one adjacent viral format worth adapting.
+Honesty: you cannot see other accounts' view counts. Never state a view count, trend name or statistic you didn't verify.
+
+## 3. Write
+- 6–10 hooks, score them (claim-first, stakes in the hook, a concrete number/date/thing), pick the winner.
+  Never open with "stop scrolling". Hook on screen ≤ ~9 words.
+- Script = hook + 5–8 beats, each one or two short sentences (≤ ~20 words). Every line is narrated AND shown.
+- The emotion must BE the app's argument: build the problem (generic affirmations aren't yours → you quit by day 2–4),
+  and the app is the answer (ManifestAI writes your affirmations from the one sentence you type about your own goal).
+- Each beat's `query` describes what is VISIBLE (e.g. "hand writing in notebook close up"), never the meaning.
+- Brand facts only: personalised affirmations from one typed goal, 5-minute daily practice (breathe · intention · one action),
+  21-day journey, vision boards, sleep tracks, meditations, journal, habits & streaks, AI coach.
+  India prices if mentioned: ₹99/week, ₹249/month, ₹999/year. Never claim affirmations cause money/jobs/houses.
+  No fake testimonials, user counts, results or guarantees. No URL on screen ("link in bio").
+- Write `daily/YYYY-MM-DD/script.json` and `daily/YYYY-MM-DD/post.json`
+  (`instagram_caption` ≤2200 chars with 8–12 hashtags, `youtube_title` ≤100 chars incl. #shorts, `youtube_description`, `youtube_tags`).
+
+## 4. Build + QC
+```
+python3 tools/build_story.py daily/YYYY-MM-DD/script.json
+```
+Open `daily/YYYY-MM-DD/_build/contact.jpg` and LOOK at it: captions readable on every shot, footage matches the line,
+nothing off-topic (wrong gender/age is fine, wrong mood or weird content is not), hook frame works with sound off.
+If a clip is wrong, change that beat's `query`, delete `_build/raw0N.mp4` and its entry in `clips.json`, rebuild.
+ffprobe: 1080x1920, 30 fps, h264 + aac, 20–60 s. If QC fails twice, do NOT post — report instead.
+
+## 5. Publish
+1. Commit + push the day folder. Video URL = `https://raw.githubusercontent.com/vimanu9vr-create/manifestai-reels/<commit sha>/daily/YYYY-MM-DD/<name>.mp4` — curl -I it, expect 200.
+2. Instagram: Zapier `instagram_for_business_publish_video` with instagramPageId 17841438571126703, video URL, caption.
+   If it returns "Video is still processing", wait 3 min, then check "New Media" — only retry if today's post is NOT there (no duplicates).
+3. YouTube: Zapier `youtube_upload_video`, privacy_status public, made_for_kids false, notify_subscribers true, tags, default_language en.
+4. Append to `log.json` (date, hook, format, cta, duration, instagram_media_id, youtube_id, clips) and push.
+
+## 6. Report
+Send the user a short summary: hook, what yesterday's numbers suggested, links to both posts, anything that failed.
+Remind them (once a week, not daily) that adding a trending sound in the Instagram app boosts reach.
