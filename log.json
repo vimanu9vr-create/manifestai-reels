@@ -58,6 +58,69 @@
     "by": "Manish Ratna Buddhacharya",
     "query": "sunrise over city skyline"
    }
+  ],
+  "slot": "reel-1",
+  "type": "reel",
+  "folder": "daily/2026-11-24"
+ },
+ {
+  "date": "2026-11-24",
+  "slot": "carousel",
+  "type": "carousel",
+  "folder": "daily/2026-11-24/carousel",
+  "hook": "5 affirmations your brain is quietly rejecting",
+  "slides": 8,
+  "cta": "save + comment your generic affirmation",
+  "instagram_media_id": "18426144739157308",
+  "photos": [
+   {
+    "id": 6382485,
+    "url": "https://www.pexels.com/photo/dreamy-woman-with-crossed-legs-sitting-near-window-6382485/",
+    "by": "Liza Summer",
+    "query": "woman sitting alone thinking by window"
+   },
+   {
+    "id": 6633602,
+    "url": "https://www.pexels.com/photo/credit-cards-lying-on-a-table-and-shopping-bags-on-the-floor-6633602/",
+    "by": "Cup of  Couple",
+    "query": "empty wallet on wooden table"
+   },
+   {
+    "id": 40080977,
+    "url": "https://www.pexels.com/photo/minimalist-bathroom-interior-with-circular-mirror-40080977/",
+    "by": "Kosart Studio",
+    "query": "bathroom mirror soft light"
+   },
+   {
+    "id": 36560575,
+    "url": "https://www.pexels.com/photo/misty-morning-landscape-with-trees-in-fog-36560575/",
+    "by": "Peter Dyllong",
+    "query": "foggy morning field"
+   },
+   {
+    "id": 30667874,
+    "url": "https://www.pexels.com/photo/raindrops-on-window-with-gloomy-background-30667874/",
+    "by": "Bade Saba",
+    "query": "rain on window"
+   },
+   {
+    "id": 9300721,
+    "url": "https://www.pexels.com/photo/laptop-in-an-empty-office-9300721/",
+    "by": "Mikhail Nilov",
+    "query": "laptop on desk in quiet room"
+   },
+   {
+    "id": 5583621,
+    "url": "https://www.pexels.com/photo/a-person-writing-on-white-notebook-5583621/",
+    "by": "Thirdman",
+    "query": "hand writing in notebook"
+   },
+   {
+    "id": 35061559,
+    "url": "https://www.pexels.com/photo/serene-sunrise-over-calm-lake-water-35061559/",
+    "by": "Rino Adamo",
+    "query": "sunrise over calm water"
+   }
   ]
  }
 ]
